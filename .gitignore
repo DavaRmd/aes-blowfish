@@ -1,0 +1,10 @@
+.env
+.directory
+tailwindcss.sh
+tailwindcss.exe
+
+__pycache__/
+.vscode/
+CACHE/
+uploads/
+venv/
