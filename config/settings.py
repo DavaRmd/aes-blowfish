@@ -26,34 +26,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY =os.environ.get('SECRET_KEY') #untuk penggunaan render, agar render dapat membaca 
-try: 
-    from decouple import config
-    SECRET_KEY = config('DJANGO_SECRET_KEY') # untuk penggunaan local 
-except:
-    pass
+SECRET_KEY = config('DJANGO_SECRET_KEY') # untuk penggunaan local 
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config('DEBUG', default=False, cast=bool) # untuk penggunaan local 
 
-DEBUG = os.getenv('DEBUG') == 'True' #untuk penggunaan render, agar render dapat membaca 
-try:
-    from decouple import config
-    DEBUG = config('DEBUG', default=False, cast=bool) # untuk penggunaan local 
-except:
-    pass
-
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') #untuk penggunaan render, agar render dapat membaca 
-try:
-    from decouple import config
-    ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')]) # untuk penggunaan local 
-except:
-    pass
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')]) # untuk penggunaan local 
 
 SESSION_COOKIE_SECURE = False if DEBUG else True
 
 CSRF_COOKIE_SECURE = False if DEBUG else True
 
-CSRF_LIST_ENTRIES = config('CSRF_TRUSTED_ORIGINS', cast=lambda v: [s.strip() for s in v.split(',')])
+CSRF_LIST_ENTRIES = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='https://encryption-app.up.railway.app',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
+
 CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1', 'https://*.localhost', *CSRF_LIST_ENTRIES] if DEBUG else CSRF_LIST_ENTRIES  # type: ignore
 
 SECURE_SSL_REDIRECT = False if DEBUG else True
