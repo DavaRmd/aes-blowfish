@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from os.path import join
 from pathlib import Path
 from decouple import config
+import os 
+import pymysql
+pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +25,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('DJANGO_SECRET_KEY')
+
+SECRET_KEY =os.environ.get('SECRET_KEY') #untuk penggunaan render, agar render dapat membaca 
+try: 
+    from decouple import config
+    SECRET_KEY = config('DJANGO_SECRET_KEY') # untuk penggunaan local 
+except:
+    pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
+DEBUG = os.getenv('DEBUG') == 'True' #untuk penggunaan render, agar render dapat membaca 
+try:
+    from decouple import config
+    DEBUG = config('DEBUG', default=False, cast=bool) # untuk penggunaan local 
+except:
+    pass
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',') #untuk penggunaan render, agar render dapat membaca 
+try:
+    from decouple import config
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')]) # untuk penggunaan local 
+except:
+    pass
 
 SESSION_COOKIE_SECURE = False if DEBUG else True
 
