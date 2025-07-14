@@ -51,7 +51,12 @@ CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1', 'https://*.localhost', *CSRF_LIST
 
 SECURE_SSL_REDIRECT = False if DEBUG else True
 
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', cast=lambda v: [s.strip() for s in v.split(',')])
+CORS_ALLOWED_ORIGINS = config(
+    'CORS_ALLOWED_ORIGINS',
+    default='https://encryption-app.up.railway.app',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
+
 
 CORS_ALLOW_ALL_ORIGINS = True if DEBUG else False
 
