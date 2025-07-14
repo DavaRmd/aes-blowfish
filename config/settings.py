@@ -31,7 +31,11 @@ SECRET_KEY = config('DJANGO_SECRET_KEY', default='your-fallback-key') # untuk pe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool) # untuk penggunaan local 
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')]) # untuk penggunaan local 
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='127.0.0.1,localhost,encryption-app.up.railway.app',
+    cast=lambda v: [s.strip() for s in v.split(',')]
+) # untuk penggunaan local 
 
 SESSION_COOKIE_SECURE = False if DEBUG else True
 
