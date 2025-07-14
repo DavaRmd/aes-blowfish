@@ -427,7 +427,7 @@ class Blowfish:
     def key_bits(self):
         return 56 * 8
 
-# Copyright (C) 2002 Michael Gilfix <mgilfix@eecs.tufts.edu>
+
 
 
 if __name__ == '__main__':

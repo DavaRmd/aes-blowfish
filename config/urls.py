@@ -38,6 +38,5 @@ urlpatterns = [
         )
     ),
 
-    path("download/", include(("download.urls", "download"), namespace="download")),
-    path("rbac/", include(("rbac.urls", "rbac"), namespace="rbac"))
+    path("download/", include(("download.urls", "download"), namespace="download"))
 ]
