@@ -34,7 +34,7 @@
           <strong>Blowfish Validation Key :</strong> {{ validation_key }}<br/>
           <strong>Kode :</strong> {{ name }} <br/>
           <strong>Ukuran :</strong> {{ size }} <br/>
-          <strong>Checksum :</strong> {{ checksum }}
+          
         </p>
         <button onclick="window.location.href='{% url 'download:object' oid %}'" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-700">
           <i class='bx bxs-file-{{ extension }}'></i>

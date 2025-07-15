@@ -458,10 +458,7 @@ def get_key_iv(password, salt, workload=100000):
 
 def encrypt(key, plaintext, workload=100000):
     """
-    Encrypts `plaintext` with `key` using AES-128, an HMAC to verify integrity,
-    and PBKDF2 to stretch the given key.
-
-    The exact algorithm is specified in the module docstring.
+  
     """
     if isinstance(key, str):
         key = key.encode('utf-8')

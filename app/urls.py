@@ -5,7 +5,6 @@ from django.views.generic import RedirectView
 
 
 urlpatterns = [
-    path("", RedirectView.as_view(url="/dashboard/")),
     path("dashboard/", DashboardView.as_view(), name="dashboard"),
     path("encryption/", EncryptionView.as_view(), name="encryption"),
     path("decryption/", DecryptionView.as_view(), name="decryption"),
